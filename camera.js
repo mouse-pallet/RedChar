@@ -1,11 +1,21 @@
 $(document).ready(function(){
+    // add event listener
+    $('#cameraButton').click(function(){
+        console.log('cameraButton clicked');
+        $('#fileInput').click();
+    });
+    $('#checkButton').click(function(){
+        console.log('checkButton clicked');
+        $('#fileOutput').click();
+        sendJob();
+    });
+
+    
     var $fileInput = $('#fileInput');
     var $obj = $('#camera');
     if( $obj == null ){	return;	}
     $fileInput.change(function() {
-        console.log($fileInput);
         var file = $fileInput[0].files[0];
-        console.log(file);
         // MegaPixImage constructor accepts File/Blob object.
         var mpImg = new MegaPixImage(file);
 
@@ -18,16 +28,37 @@ $(document).ready(function(){
     });
 });
 
-$('#fileOutput').click(function(e){
-    var image = new Image();
-    var canvas = document.createElement("canvas");
-    var canvasContext = canvas.getContext("2d");
-    image.onload = function(){
-        canvas.width = image.width;
-        canvas.height = image.height;
-        canvasContext.drawImage(image, 0, 0, image.width, image.height);
-        var dataURL = canvas.toDataURL();
-        console.log(dataURL);
-    };
-    image.src = $('#fileInput').value;
-});
+API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35';
+
+// 認識jobをなげる
+function sendJob(){
+    var $form = $('#postform').get(0);
+    //var $button = $form.find('button');
+    var formdata = new FormData($form);
+
+    //send FormData
+    $.ajax({
+        url: API_TARGET,
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        data: formdata,
+        dataType: 'json',
+        error: function(){
+            console.log('error');
+        },
+        success: function(data, dataType){
+            console.log(data);
+        }
+    });
+    console.log('finish');
+    return false;
+//});
+};
+
+//jobが終わったか確認&結果取得
+function getResult(){
+
+};
+
+

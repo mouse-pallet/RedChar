@@ -22,17 +22,19 @@
     </div>
     <div role="main" class="ui-content">
         <div id="camera">
-        <form id="postform" method="post" action="https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35" enctype="multipart/form-data">
-        <input type="file" id="fileInput" accept="image/png,image/jpeg" style="display:none;">
-        <div  style="display:none;"><input type="submit" id="fileOutput" value="send"></div>
+            <form id="postform">
+            <!-- <form id="postform" method="post" action="https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35" enctype="multipart/form-data"> -->
+        <input name="image" type="file" id="fileInput" accept="image/png,image/jpeg" style="display:none;">
+        <div  style="display:none;"><input type="button" id="fileOutput" value="send"></div>
         </form>
         <canvas id="resCanvas2"></canvas>
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera" onClick="$('#fileInput').click();">Camera</a>
+                <a href="#" id="cameraButton" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">Camera</a>
             </div>
             <div class="ui-block-b">
-                <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" onClick="$('#fileOutput').click();">Check</a>
+                <!-- <a href="#" id="checkButton" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" onClick="$('#fileOutput').click();">Check</a> -->
+                <a href="#" id="checkButton" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check">Check</a>
             </div>
         </div>
     </div>
