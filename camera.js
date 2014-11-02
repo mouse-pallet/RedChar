@@ -31,7 +31,8 @@ $(document).ready(function(){
 
 APIKEY = '?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35';
 
-RECOG_API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene' + APIKEY;
+//RECOG_API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene' + APIKEY;
+RECOG_API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/line' + APIKEY;
 
 // 認識jobをなげる
 function sendJob(){
