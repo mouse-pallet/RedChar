@@ -1,3 +1,4 @@
+job_id = 0;
 $(document).ready(function(){
     // add event listener
     $('#cameraButton').click(function(){
@@ -28,7 +29,9 @@ $(document).ready(function(){
     });
 });
 
-API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35';
+APIKEY = '?APIKEY=31723932483856747674576265745258735441562e653057316e65575a733465314f596c4b447263456a35';
+
+RECOG_API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene' + APIKEY;
 
 // 認識jobをなげる
 function sendJob(){
@@ -38,27 +41,66 @@ function sendJob(){
 
     //send FormData
     $.ajax({
-        url: API_TARGET,
+        url: RECOG_API_TARGET,
         type: 'POST',
         contentType: false,
         processData: false,
         data: formdata,
         dataType: 'json',
         error: function(){
-            console.log('error');
+            console.log('post error');
         },
         success: function(data, dataType){
-            console.log(data);
+            console.log('post success');
+            console.log(data['job']);
+            if(data['job']['@status'] == 'queue'){
+                job_id = data['job']['@id'];
+                setTimeout(getResult, 1000);
+            }
         }
     });
-    console.log('finish');
     return false;
 //});
 };
 
+GET_API_TARGET = 'https://api.apigw.smt.docomo.ne.jp/characterRecognition/v1/scene/';
 //jobが終わったか確認&結果取得
 function getResult(){
+    var requrl = GET_API_TARGET + job_id + APIKEY;
+    console.log(requrl);
+    $.ajax({
+        url: requrl,
+        //type: 'GET',
+        error: function(){
+            console.log('get error');
+        },
+        success: function(data, dataType){
+            console.log('get success');
+            console.log(data);
+
+            //もしprocessならもう1回
+            var jobst = data['job']['@status'];
+            if(jobst == 'success'){
+                console.log(data);
+                printResult(data['words']);
+            }
+            else if(jobst == 'deleted' || jobst == 'failure'){
+                console.log('get failure or deleted');
+            }
+            else{ // queue or process
+                setTimeout(getResult(), 700);
+            }
+        }
+    });
 
 };
 
-
+nextUrl = 'result.html?';
+function printResult(words){
+    var count = words['@count'];
+    var list = words['word'];
+    for(var i=0; i<count; i++){
+        nextUrl += list[i]['@text'] + '&';
+    }
+    location.href = nextUrl;
+}
