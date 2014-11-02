@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>RedChar ログインページ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link href="style.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./js/megapix-image.js"></script>
+    <script src="camera.js"></script>
 </head>
 <body>
 <div data-role="page">
@@ -15,22 +17,21 @@
         <h1>RedChar</h1>
     </div>
     <div role="main" class="ui-content">
-        <div>
-            <p></p>
-        </div>
-        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-auto-logout-link="false"></div>
-        <p>todo: fb-login</p>
-
-        <a href="result.html" class="ui-btn ui-corner-all ui-shadow">Login</a>
-
+        <div id="camera">
+        <form method="post" enctype="multipart/form-data">
+        <input type="file" id="fileInput" style="display:none;">
+        <div  style="display:none;"><input type="submit" id="fileOutput" value="send"></div>
+        </form>
+        <canvas id="resCanvas2"></canvas>
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a href="result.html" class="ui-btn ui-corner-all ui-shadow">Login</a>
+                <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera" onClick="$('#fileInput').click();">Camera</a>
             </div>
             <div class="ui-block-b">
-                <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">Camera</a>
+                <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check" onClick="$('#fileOutput').click();">Check</a>
             </div>
         </div>
+    </div>
     </div>
 </div>
 </body>
