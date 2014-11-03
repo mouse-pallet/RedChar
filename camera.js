@@ -40,6 +40,9 @@ function sendJob(){
     //var $button = $form.find('button');
     var formdata = new FormData($form);
 
+    // change #checkButton state 
+    $('#checkButton').addClass('ui-state-disabled');
+
     //send FormData
     $.ajax({
         url: RECOG_API_TARGET,
