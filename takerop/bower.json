@@ -1,0 +1,20 @@
+{
+  "name": "takerop",
+  "version": "0.0.0",
+  "authors": [
+    "Shingo Inoue <inoue.shingo@hamee.co.jp>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "Jcrop": "~0.9.12",
+    "normalize-css": "~3.0.2"
+  }
+}

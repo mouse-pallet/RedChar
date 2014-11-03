@@ -13,6 +13,13 @@ function showNoData(){
 }
 
 var search_address = 'https://www.facebook.com/search/?type=users&q=';
+function makeALink(word)
+{
+    var address = search_address += query;
+    var link = $('<a>').attr('href', address).text(query);
+    var li = $('<li>');
+}
+
 function showWords(words){
     //単語をすべて表示する
     var query = '';
@@ -21,15 +28,25 @@ function showWords(words){
         $('#debug').append(child);
         query += words[i];
     }
+    $('#debug').listview('refresh');
+
     var address = search_address += query;
     console.log(address);
     var link = $('<a>').attr('href', address).text(query);
 
+    var li = $('<li>');
+    //li.append($('<a>').attr('href');
     $('#result').append($('<li>').append(link));
+    $('#result').listview('refresh');
 }
 
 function splitParams(url){
     var idx = url.lastIndexOf('?');
+    if(idx == -1){
+        //クエリがない
+        showNoData();
+        return [];
+    }
     var substr = url.slice(idx+1, url.length);
     var words = substr.split('&');
     console.log(words);

@@ -6,3 +6,13 @@ canvas{
     margin: 0 auto;
     display: block;
 }
+
+.ui-content ul.ui-listview{
+    margin: 0 -1em;
+}
+.ui-content ul.ui-listview: first-child{
+    margin: -1em -1em 0px;
+}
+.ui-content ul.ui-listview: last-child{
+    margin: 0px -1em -1em;
+}
