@@ -12,7 +12,7 @@ function showNoData(){
     $('#result').append($('<li>No data</li>'));
 }
 
-var search_address = 'https://www.facebook.com/search/results/?q=';
+var search_address = 'https://www.facebook.com/search/?type=users&q=';
 function showWords(words){
     //単語をすべて表示する
     var query = '';
