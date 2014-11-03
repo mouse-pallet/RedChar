@@ -25,7 +25,7 @@ $(document).ready(function(){
         // To detect orientation of JPEG file in JS, you can use exif.js from https://github.com/jseidelin/exif-js
 
         var resCanvas = document.getElementById('resCanvas2');
-        mpImg.render(resCanvas, { maxWidth: 300, maxHeight: 300, orientation: 6 });
+        mpImg.render(resCanvas, { maxWidth: 300, maxHeight: 300/*, orientation: 6*/ });
     });
 });
 
@@ -54,7 +54,12 @@ function sendJob(){
         success: function(data, dataType){
             console.log('post success');
             console.log(data['job']);
-            if(data['job']['@status'] == 'queue'){
+            // line認識の場合successかfailureする
+            if(data['job']['@status'] == 'success'){
+                printResult(data['words']);
+            }
+            else if(data['job']['@status'] == 'queue'){
+                // scene
                 job_id = data['job']['@id'];
                 setTimeout(getResult, 1000);
             }
@@ -93,7 +98,6 @@ function getResult(){
             }
         }
     });
-
 };
 
 nextUrl = 'result.html?';
@@ -101,7 +105,9 @@ function printResult(words){
     var count = words['@count'];
     var list = words['word'];
     for(var i=0; i<count; i++){
-        nextUrl += list[i]['@text'] + '&';
+        nextUrl += list[i]['@text'];
+        if(i != count - 1)
+            nextUrl += '&';
     }
     location.href = nextUrl;
 }
