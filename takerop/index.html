@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+	<link rel="stylesheet" href="bower_components/Jcrop/css/jquery.Jcrop.min.css">
+</head>
+<body>
+	<canvas id="preview" width="360" height="360"></canvas>
+
+	<p>
+		<input type="file" accept="image/*;capture=camera" id="take-a-picture">
+	</p>
+	<p>
+		<button id="done">Done!</button>
+	</p>
+
+	<li id="debug"></li>
+
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/Jcrop/js/jquery.Jcrop.min.js"></script>
+
+	<script src="js/app.js"></script>
+</body>
+</html>
